@@ -10,10 +10,12 @@ class TextRecognizerCamera extends StatefulWidget {
   const TextRecognizerCamera({
     super.key,
     required this.onTextRecognised,
+    required this.onValidText,
     this.cameraSize,
   });
 
   final void Function(String) onTextRecognised;
+  final bool Function(String) onValidText;
   final Size? cameraSize;
 
   @override
@@ -36,7 +38,7 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
     _cameras = await availableCameras();
     cameraController = CameraController(
       _cameras[0],
-      ResolutionPreset.high,
+      ResolutionPreset.max,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21 // for Android
@@ -53,7 +55,7 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
   }
 
   Future<void> imageStream() async {
-    Future.delayed(const Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 1), () async {
       // final inputImage = Utils.inputImageFromCameraImage(
       //   image: image,
       //   camera: _cameras[0],
@@ -70,7 +72,13 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
       final recognisedText = await textDetector.processImage(inputImage);
       textDetector.close();
 
-      widget.onTextRecognised(recognisedText.text);
+      for (var block in recognisedText.blocks) {
+        if (widget.onValidText(block.text)) {
+          widget.onTextRecognised(block.text.replaceAll(' ', ''));
+        }
+      }
+
+      // widget.onTextRecognised(recognisedText.text);
       // log(recognisedText.text);
 
       imageStream();
@@ -96,7 +104,10 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
           child: SizedOverflowBox(
             size: widget.cameraSize ?? const Size(300, 100),
             alignment: Alignment.center,
-            child: CameraPreview(cameraController),
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: cameraController.buildPreview(),
+            ),
           ),
         ),
       ),
