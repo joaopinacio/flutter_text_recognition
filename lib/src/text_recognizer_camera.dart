@@ -11,11 +11,13 @@ class TextRecognizerCamera extends StatefulWidget {
     super.key,
     required this.onTextRecognised,
     required this.onValidText,
+    this.textCorrection,
     this.cameraSize,
   });
 
   final void Function(String) onTextRecognised;
   final bool Function(String) onValidText;
+  final String Function(String)? textCorrection;
   final Size? cameraSize;
 
   @override
@@ -73,8 +75,9 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
       textDetector.close();
 
       for (var block in recognisedText.blocks) {
-        if (widget.onValidText(block.text)) {
-          widget.onTextRecognised(block.text.replaceAll(' ', ''));
+        final correctedText = widget.textCorrection?.call(block.text) ?? block.text;
+        if (widget.onValidText(correctedText)) {
+          widget.onTextRecognised(correctedText.replaceAll(' ', ''));
         }
       }
 
