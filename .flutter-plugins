@@ -1,8 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-camera=/Users/joao/.pub-cache/hosted/pub.dev/camera-0.11.0+2/
-camera_android_camerax=/Users/joao/.pub-cache/hosted/pub.dev/camera_android_camerax-0.6.10/
-camera_avfoundation=/Users/joao/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.17+5/
+camera=/Users/joao/.pub-cache/hosted/pub.dev/camera-0.11.1/
+camera_android=/Users/joao/.pub-cache/hosted/pub.dev/camera_android-0.10.10/
+camera_android_camerax=/Users/joao/.pub-cache/hosted/pub.dev/camera_android_camerax-0.6.13/
+camera_avfoundation=/Users/joao/.pub-cache/hosted/pub.dev/camera_avfoundation-0.9.18+1/
 camera_web=/Users/joao/.pub-cache/hosted/pub.dev/camera_web-0.3.5/
-flutter_plugin_android_lifecycle=/Users/joao/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.23/
+flutter_plugin_android_lifecycle=/Users/joao/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24/
 google_mlkit_commons=/Users/joao/.pub-cache/hosted/pub.dev/google_mlkit_commons-0.9.0/
 google_mlkit_text_recognition=/Users/joao/.pub-cache/hosted/pub.dev/google_mlkit_text_recognition-0.14.0/

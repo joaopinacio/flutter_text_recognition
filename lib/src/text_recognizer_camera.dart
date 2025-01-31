@@ -107,10 +107,7 @@ class _TextRecognizerCameraState extends State<TextRecognizerCamera> {
           child: SizedOverflowBox(
             size: widget.cameraSize ?? const Size(300, 100),
             alignment: Alignment.center,
-            child: RotatedBox(
-              quarterTurns: 1,
-              child: cameraController.buildPreview(),
-            ),
+            child: CameraPreview(cameraController),
           ),
         ),
       ),
